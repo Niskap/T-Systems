@@ -12,7 +12,7 @@ public class Calculator {
         System.out.println(c.evaluate("-12)1//(")); // Result: null
 
     }
-    private String evaluate (String s){
+    public String evaluate (String s){
         LinkedList<String> withParentheses = new LinkedList<>();
         for (int i = 0; i < findNumbers(s).length; i++){
             if (findNumbers(s)[i] != null){

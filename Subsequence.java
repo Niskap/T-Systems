@@ -11,7 +11,7 @@ public class Subsequence {
         System.out.println(b); // Result: true
     }
 
-    private boolean find(List<Object> shortLine, List<Object> longLine) {
+    public boolean find(List<Object> shortLine, List<Object> longLine) {
         int okCount = 0;
         for (Object obj : longLine) {
             if (shortLine.get(okCount).equals(obj)) {
