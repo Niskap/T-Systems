@@ -1,17 +1,18 @@
 package javaschoolexam;
 
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Calculator {
     public static void main(String[] args) {
         Calculator c = new Calculator();
         System.out.println(c.evaluate("(1+38)*4-5")); // Result: 151
-        System.out.println(c.evaluate("7*6/9+8")); // Result: 29
+        System.out.println(c.evaluate("7*6/2+8")); // Result: 29
         System.out.println(c.evaluate("-12)1//(")); // Result: null
 
     }
-    public String evaluate (String s){
+    private String evaluate (String s){
         LinkedList<String> withParentheses = new LinkedList<>();
         for (int i = 0; i < findNumbers(s).length; i++){
             if (findNumbers(s)[i] != null){
@@ -35,7 +36,7 @@ public class Calculator {
         } else return "Result: null";
     }
 
-    public String [] findNumbers (String s){
+    private String [] findNumbers (String s){
         char [] charArray = s.toCharArray ();
         String [] numsAndDelimiters = new String[s.length()];
         int k = 1;
@@ -51,7 +52,7 @@ public class Calculator {
         return numsAndDelimiters;
     }
 
-    public LinkedList <String> removeParentheses (String [] s){
+    private LinkedList <String> removeParentheses (String [] s){
         LinkedList <String> inPar = new LinkedList<>();
         LinkedList <String> allStr = new LinkedList<>();
             int left = 0;
@@ -69,22 +70,17 @@ public class Calculator {
             }
             if (left > right) return allStr;
 
-            for (int i = left + 1; i <= right - 1; i++) {
-                inPar.add(s[i]);
-            }
-            for (int i = 0; i < left; i++){
-                allStr.add(s[i]);
-            }
-
-            allStr.add(calculate(inPar));
-            for (int i = right+1; i < s.length; i++){
+        inPar.addAll(Arrays.asList(s).subList(left + 1, right));
+        allStr.addAll(Arrays.asList(s).subList(0, left));
+        allStr.add(calculate(inPar));
+            for (int i = right + 1; i < s.length; i++){
                 if(s[i] != null)
                 allStr.add(s[i]);
             }
         return allStr;
     }
 
-    public String calculate (LinkedList <String> noParenthese) {
+    private String calculate (LinkedList <String> noParenthese) {
         try {
             for (int i = 0; i < noParenthese.size(); i++) {
                 if (noParenthese.get(i).equals("*")) {

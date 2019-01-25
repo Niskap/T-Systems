@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Pyramid {
     public static void main(String[] args) throws CannotBuildPyramidException {
-        int [] inputA = {2, 8, 9, 4, 4, 5, 5, 6, 6, 9};
+        int [] inputA = {2, 8, 9, 4, 4, 5, 5, 6, 6, 8};
         Pyramid p = new Pyramid();
-        p.builtPyramid(inputA);
+        p.buildPyramid(inputA);
     }
 
-    private void builtPyramid (int [] input) throws CannotBuildPyramidException {
+    private void buildPyramid (int [] input) throws CannotBuildPyramidException {
         int lineCount = 1;
         int numsInLine = 1;
         Arrays.sort(input);
@@ -21,7 +21,7 @@ public class Pyramid {
             if (lCounter == input.length) break;
             check = input[lCounter];
             lineCount++;
-            numsInLine = numsInLine +2;
+            numsInLine += 2;
         }
         } catch (Exception e){
             throw new CannotBuildPyramidException (e);
@@ -37,7 +37,7 @@ public class Pyramid {
         }
     }
 
-    public void addZero (int [] nums){
+    private void addZero (int [] nums){
         int [] newWithzero = new int[nums.length];
         int cnt = 0;
         for (int i = 0; i <= nums.length/2; i++){
@@ -54,6 +54,6 @@ public class Pyramid {
 }
 
 class CannotBuildPyramidException extends Exception{
-    public CannotBuildPyramidException (Throwable e) {
+    public CannotBuildPyramidException(Throwable e) {
     }
 }
